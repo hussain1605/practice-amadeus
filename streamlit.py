@@ -143,7 +143,7 @@ def generate_instructional_doc(skeleton_answer, skeleton_question):
   answer = response.choices[0].message.content.strip()
   result = json.loads(answer)
 
-  with open(f'/Users/hussainbhinderwala/RAG_pdf/instructional_documents/{skeleton_question}.json', 'w') as json_file:
+  with open(f'/instructional_documents/{skeleton_question}.json', 'w') as json_file:
         json.dump(result, json_file, indent=4)  # Write the result to a JSON file with indentation for readability
   return(result)
 
