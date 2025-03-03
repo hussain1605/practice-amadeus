@@ -143,7 +143,7 @@ def generate_instructional_doc(skeleton_answer, skeleton_question):
   answer = response.choices[0].message.content.strip()
   result = json.loads(answer)
 
-  with open(f'/instructional_documents/{skeleton_question}.json', 'w') as json_file:
+  with open(f'instructional_documents/{skeleton_question}.json', 'w') as json_file:
         json.dump(result, json_file, indent=4)  # Write the result to a JSON file with indentation for readability
   return(result)
 
@@ -194,7 +194,7 @@ def streamlit_interface():
 
       with st.status("Generating Practice Scenario")as scenario:
               # Check if the instructional document already exists
-        file_path = f"/Users/hussainbhinderwala/RAG_pdf/instructional_documents/{api_answer['question']}.json"
+        file_path = f"instructional_documents/{api_answer['question']}.json"
         if not os.path.exists(file_path):  # If the file does not exist
             inst_doc = generate_instructional_doc(api_answer["answer"], api_answer["question"])
             print("instructional doc ready!")
