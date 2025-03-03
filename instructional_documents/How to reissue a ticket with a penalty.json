@@ -1,0 +1,113 @@
+{
+    "question": "You need to reissue a ticket for Mrs. Anne Johnson. Her previous itinerary was booked under the PNR ABC123 and includes a flight from LAX (Los Angeles) to JFK (New York) on the 15th of December 2023. A penalty of 1520 needs to be applied for the reissue. The new flight number for her itinerary is DL1508 and it departs on the 20th of December 2023. Please follow the steps to process this reissue.",
+    "answer": [
+        {
+            "Step_No": 1,
+            "Step_Title": "Retrieve the PNR",
+            "Command_Format": "RT{PNR}",
+            "Common_Mistakes": "Forgetting the correct PNR or using incorrect retrieval format.",
+            "Correct_Input": "RT/ABC123",
+            "Hint": "Use the correct PNR to access the reservation.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 2,
+            "Step_Title": "Display the existing TST to review before starting an exchange",
+            "Command_Format": "TQT/T{TST Number}",
+            "Common_Mistakes": "Using the wrong TST number or forgetting to check existence of TST.",
+            "Correct_Input": "TQT/T1",
+            "Hint": "If unsure about TST number, check the TST details in the PNR.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 3,
+            "Step_Title": "Update the new required segments in the PNR by checking the availability",
+            "Command_Format": "AN{Departure Date in DDMMM}{City Pair Codes}/A{2 Letter Airline Code}",
+            "Common_Mistakes": "Incorrect format for the date or city pair codes.",
+            "Correct_Input": "AN20DECLAXJFK/A",
+            "Hint": "Ensure the airline code is formatted correctly, two letters.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 4,
+            "Step_Title": "Update the TST with the new itinerary",
+            "Command_Format": "TTU/S{Segment Number of Range}",
+            "Common_Mistakes": "Not specifying the correct segment or TST number.",
+            "Correct_Input": "TTU/S1-1",
+            "Hint": "Confirm the correct segment numbers to update.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 5,
+            "Step_Title": "Update/Set the TST for exchange",
+            "Command_Format": "TTK/T{TST Number}/EXCH",
+            "Common_Mistakes": "Forgetting to specify the TST number or misunderstanding exchange setup.",
+            "Correct_Input": "TTK/T1/EXCH",
+            "Hint": "Make sure the TST is correctly set up for the exchange.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 6,
+            "Step_Title": "Update the TST Information manually - Update Stopover / No Stopover/Transit, Fare Basis & Baggage Details in TST",
+            "Command_Format": "TTK/L(Segment Line number in TST}(X for No stopover & O for Stopover}",
+            "Common_Mistakes": "Incorrectly marking stopovers or forgetting baggage allowance.",
+            "Correct_Input": "TTK/L1X",
+            "Hint": "Review the stopover rules before applying.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 7,
+            "Step_Title": "Update the TST Information manually - Update Not Valid Before(NVB) & Not Valid After Dates(NVA)",
+            "Command_Format": "TTK/L(Segment Line number in TST}/V(NVB Date in DDMMM}{NVA Date in DDMMM}",
+            "Common_Mistakes": "Incorrect date format or wrong line identifiers.",
+            "Correct_Input": "TTK/L1-1/V20DEC30JAN",
+            "Hint": "Double-check the NVB and NVA dates are in the correct format.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 8,
+            "Step_Title": "Update the TST Information manually - Update the fare with the penalty fee and total amount.",
+            "Command_Format": "TTK/X{Penalty Amount}{Penalty Code}/T{Total Amount for TST}",
+            "Common_Mistakes": "Entering incorrect penalty amounts or tax codes.",
+            "Correct_Input": "TTK/X1520DU/T1520",
+            "Hint": "Verify penalty codes and amounts are accurately noted.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 9,
+            "Step_Title": "Remove the TST Flags",
+            "Command_Format": "TTF/ALL",
+            "Common_Mistakes": "Forget to remove flags after updating TST.",
+            "Correct_Input": "TTF/ALL",
+            "Hint": "This step is necessary to ensure the TST is valid for ticketing.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 10,
+            "Step_Title": "Enter the original document details / FO Line.",
+            "Command_Format": "FO*L{FA/FHE line number of the PNR for old ticket number}/P{Passenger Number}",
+            "Common_Mistakes": "Using incorrect line numbers or passenger numbers.",
+            "Correct_Input": "FO*L11/P1",
+            "Hint": "Confirm the correct line number corresponds to the old ticket.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 11,
+            "Step_Title": "Update the Old and New form of Payment",
+            "Command_Format": "FPO/{Old Form of Payment}+/{New form of Payment}",
+            "Common_Mistakes": "Forgetting to delete previous FP lines if needed.",
+            "Correct_Input": "FPO/CASH+/CCVIXXXXXXXXXXXX0002/1225",
+            "Hint": "Add the new form of payment correctly to avoid errors.",
+            "Output": "Output"
+        },
+        {
+            "Step_No": 12,
+            "Step_Title": "Issue the tickets",
+            "Command_Format": "TTP/T{TST Number}/RT",
+            "Common_Mistakes": "Not specifying the TST number properly.",
+            "Correct_Input": "TTP/T1/RT",
+            "Hint": "Ensure all information is correct before issuing the ticket.",
+            "Output": "Output"
+        }
+    ]
+}

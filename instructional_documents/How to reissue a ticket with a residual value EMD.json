@@ -1,0 +1,77 @@
+{
+    "question": "You need to reissue a ticket for Mr. John Doe due to a schedule change. His original ticket was issued for FLIGHT123 from LAX to JFK on 15OCT2023. The new ticket will be for FLIGHT456 from LAX to JFK on 20OCT2023. The original ticket number is 016-9876543210 and his PNR is 4Z6GHT. He also has a residual value from an EMD (Electronic Miscellaneous Document) that should be processed during this reissue. Please follow the steps to complete the reissue process.",
+    "answer": [
+        {
+            "Step_No": 1,
+            "Step_Title": "Retrieve the PNR",
+            "Command_Format": "RT{PNR}",
+            "Common_Mistakes": "[Incorrect PNR format; failing to include the full PNR code]",
+            "Correct_Input": "RT/4Z6GHT",
+            "Hint": "Retrieve the PNR using the exact code provided.",
+            "Output": "PNR retrieved successfully."
+        },
+        {
+            "Step_No": 2,
+            "Step_Title": "Display the existing TST",
+            "Command_Format": "TQT/T{TST Number}",
+            "Common_Mistakes": "[Using the wrong TST Number; forgetting to specify the TST]",
+            "Correct_Input": "TQT/T1",
+            "Hint": "Use the TQT command to view the TST associated with the PNR.",
+            "Output": "Existing TST displayed."
+        },
+        {
+            "Step_No": 3,
+            "Step_Title": "Check Availability for New Flight",
+            "Command_Format": "AN{Departure Date in DDMMM}{City Pair Codes}/A{2 Letter Airline Code}",
+            "Common_Mistakes": "[Incorrectly entering the city codes; formatting errors with the date]",
+            "Correct_Input": "AN20OCTLAXJFK/AAA",
+            "Hint": "Ensure the date is in correct format and the airline code is valid.",
+            "Output": "Flight availability checked."
+        },
+        {
+            "Step_No": 4,
+            "Step_Title": "Update the TST with the New Itinerary",
+            "Command_Format": "TTU/S{Segment Number or Range}",
+            "Common_Mistakes": "[Failing to correctly specify segment details; omitting the TST number]",
+            "Correct_Input": "TTU/S1-2",
+            "Hint": "Update the TST with the new segments ensuring the correct range is specified.",
+            "Output": "TST updated with new itinerary."
+        },
+        {
+            "Step_No": 5,
+            "Step_Title": "Set the TST for Exchange",
+            "Command_Format": "TTK/T{TST Number}/EXCH",
+            "Common_Mistakes": "[Using the wrong TST Number; forgetting the EXCH command]",
+            "Correct_Input": "TTK/T1/EXCH",
+            "Hint": "Make sure to specify the TST number correctly when setting for exchange.",
+            "Output": "TST set to exchange mode."
+        },
+        {
+            "Step_No": 12,
+            "Step_Title": "Create Pricing Record for Residual Value EMD",
+            "Command_Format": "TMC/V{2 Letter Airline Code}/L{Service Segment Number}",
+            "Common_Mistakes": "[Not including the airline code; wrong service segment number]",
+            "Correct_Input": "TMC/AA/L2",
+            "Hint": "Ensure the correct airline code and service segment number are used.",
+            "Output": "Pricing record created."
+        },
+        {
+            "Step_No": 8,
+            "Step_Title": "No New Form of Payment Required",
+            "Command_Format": "FPO/{Old Form Of Payment}",
+            "Common_Mistakes": "[Inserting a new form of payment unnecessarily]",
+            "Correct_Input": "FPO/CASH",
+            "Hint": "Only the old form of payment is needed if no additional payment is required.",
+            "Output": "Form of Payment set."
+        },
+        {
+            "Step_No": 19,
+            "Step_Title": "Issue the Ticket and EMD Together",
+            "Command_Format": "TTP/T{TST Number}3/TTM/M{TSM Number}/RT",
+            "Common_Mistakes": "[Omitting EMD issuance; incorrect TST or TSM numbers]",
+            "Correct_Input": "TTP/T1/TTM/M2/RT",
+            "Hint": "Ensure both ticket and EMD are issued in one command to avoid errors.",
+            "Output": "New ticket and EMD issued successfully."
+        }
+    ]
+}
